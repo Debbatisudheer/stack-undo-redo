@@ -15,6 +15,11 @@
             justify-content: center; /* Center content vertically */
             align-items: center; /* Center content horizontally */
         }
+        img {
+            width: 400px; /* Adjust the width as needed */
+            height: 500px; /* Adjust the height as needed */
+            margin-bottom: 10px; /* Adjust the margin as needed */
+        }
 
         textarea {
             width: 50%;
@@ -56,6 +61,7 @@
     </style>
 </head>
 <body>
+    <img src="stack.png" alt="Image Description">
     <textarea id="text-area" placeholder="Type PYTHON..."></textarea><br>
     <button onclick="updateText('undo')">Undo</button>
     <button onclick="updateText('redo')">Redo</button>
