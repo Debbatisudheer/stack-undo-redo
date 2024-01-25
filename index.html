@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
+        }
+
+        textarea {
+            width: 50%;
+            height: 100px; /* Adjust the height as needed */
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            resize: none;
+        }
+
+        button {
+            margin: 1px;
+            padding: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            width: 10%;
+        }
+        @media (max-width: 600px) {
+            textarea {
+                width: 90%;
+            }
+
+            button {
+                width: 40%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <textarea id="text-area" placeholder="Type PYTHON..."></textarea><br>
+    <button onclick="updateText('undo')">Undo</button>
+    <button onclick="updateText('redo')">Redo</button>
+
+    <script>
+        let textStack = [];
+        let textIndex = -1;
+
+        function updateText(action) {
+            const textarea = document.getElementById('text-area');
+
+            if (action === 'undo' && textIndex > 0) {
+                textIndex--;
+                textarea.value = textStack[textIndex];
+            } else if (action === 'redo' && textIndex < textStack.length - 1) {
+                textIndex++;
+                textarea.value = textStack[textIndex];
+            }
+        }
+
+        document.getElementById('text-area').addEventListener('input', function() {
+            const currentText = this.value;
+
+            if (textIndex === -1 || currentText !== textStack[textIndex]) {
+                textIndex++;
+                textStack[textIndex] = currentText;
+            }
+        });
+    </script>
+</body>
+</html>
+
+
